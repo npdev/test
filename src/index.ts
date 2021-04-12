@@ -2,6 +2,8 @@ import express, {Request, Response} from "express";
 import dotenv from "dotenv";
 import { router } from "./routes/index";
 import mongoose from "mongoose";
+import errorMiddleware from './middleware/error.middleware';
+import HttpException from "./exceptions/HttpException";
 
 dotenv.config();
 const port = process.env.SERVER_PORT;
@@ -9,6 +11,10 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/", router);
+
+app.use((err: HttpException, req: Request, res: Response, next: express.NextFunction) => {
+    errorMiddleware(err, req, res, next);
+});
 
 mongoose.connect('mongodb://localhost:27017/ryd', {
     useCreateIndex: true,
