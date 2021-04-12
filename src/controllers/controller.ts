@@ -30,8 +30,11 @@ export class Controller {
         }
     }
 
-    public async doneIssue(id: mongoose.Types.ObjectId) {
+    public async doneIssue(id: mongoose.Types.ObjectId | null) {
         try {
+            if (!id) {
+                throw new Error('Issue ID is not provided');
+            }
             // @ts-ignore
             const updateObj = {done: true, userId: null};
             const originalIssue: IIssue = await Issue.findByIdAndUpdate({_id: id}, {$set: updateObj}, {
