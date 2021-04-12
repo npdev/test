@@ -30,6 +30,6 @@ support agent becomes available.
 # Database
 - Create database "ryd" on localhost:27017
 # Start to work with endpoints
-- Create new user by /createUser with body { "name": <userName> }
-- Create new issue by /createIssue with body { "name": <issueName> }
-- Set issue as done by /doneIssue/<issueId>
+- Create new user by /createUser with body { "name": ```userName``` }
+- Create new issue by /createIssue with body { "name": ```issueName``` }
+- Set issue as done by /doneIssue/```issueId```
