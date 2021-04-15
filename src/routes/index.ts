@@ -13,7 +13,8 @@ router.get( "/", ( req: Request, res: Response ) => {
 router.post( "/createUser", async ( req: Request, res: Response, next: express.NextFunction ) => {
     try {
         const result = await controller.createUser(req.body.name);
-        return res.status(201).send(result);
+        res.set('Content-Type', 'application/json');
+        return res.status(201).json(result);
     } catch (err) {
         next(err);
     }
